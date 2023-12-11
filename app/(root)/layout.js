@@ -14,8 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main className="container mx-auto px mb-8">
-          <section>{children}</section>
-          <RightSideBar />
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {children}
+            <RightSideBar />
+          </section>
         </main>
       </body>
     </html>
