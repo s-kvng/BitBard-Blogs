@@ -1,5 +1,6 @@
 import React from "react";
 
+import { PostWidget, Categories } from "@/components";
 const RightSideBar = () => {
   return (
     <div className=" grid lg:col-span-4 col-span-1">

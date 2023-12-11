@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "../globals.scss";
+
 import RightSideBar from "@/components/shared/RightSideBar";
+import { Header } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Header />
         <main className="container mx-auto px mb-8">
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {children}
