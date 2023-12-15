@@ -1,12 +1,9 @@
-import Image from "next/image";
-
 import { PostCard } from "@/components";
+import { getPosts } from "@/services";
 
-const posts = [
-  { title: "Reat is great", excerpt: "Learn React" },
-  { title: "Tailwind is great ", excerpt: "Learn Tailwind" },
-];
-export default function Home() {
+export default async function Home({ posts }) {
+  posts = (await getPosts()) || [];
+  console.log(posts);
   return (
     <div className="lg:col-span-8 col-span-1 bg-blue-500">
       {posts.map((post) => (
@@ -15,3 +12,11 @@ export default function Home() {
     </div>
   );
 }
+
+// export async function getStaticProps() {
+//   posts = (await getPosts()) || [];
+
+//   return {
+//     props: { posts },
+//   };
+// }
