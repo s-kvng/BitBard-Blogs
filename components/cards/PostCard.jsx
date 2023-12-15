@@ -2,25 +2,23 @@ import React from "react";
 import moment from "moment";
 import Link from "next/link";
 import Image from "next/image";
-import { ImageError } from "next/dist/server/image-optimizer";
 
 const PostCard = ({ post }) => {
-  console.log(post);
   return (
-    <div className=" bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
-      <div className=" relative overflow-hidden shadow-md   mb-6">
+    <div className=" bg-white shadow-lg rounded-lg p-0 lg:p-6 pb-8 mb-8">
+      <div className=" relative overflow-hidden shadow-md  mb-3">
         <img
           src={post.featuredImage?.url || post.featuredImage}
           alt={post.title}
-          className=" lg:h-96 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+          className="  object-center h-60 lg:h-64 w-full  object-cover shadow-lg rounded-t-lg lg:rounded-lg"
         />
-        {/* object-center absolute h-96 */}
+        {/*  absolute h-96 */}
       </div>
-      <h1 className=" transition duration-700 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold">
+      <h1 className=" transition duration-700 text-center mb-2 cursor-pointer hover:text-pink-600 text-2xl font-bold">
         <Link href={`/post/${post.slug}`}>{post.title}</Link>
       </h1>
-      <div className="block lg:flex text-center justify-center mb-8 w-full bg-blue-500">
-        <div className="flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-4/5 l bg-red-500">
+      <div className="block lg:flex text-center justify-center mb-1 w-full ">
+        <div className="flex items-center justify-center mb-3 lg:mb-0 w-full lg:w-4/5 l ">
           <Image
             src={post.author.photo?.url || post.author.photo}
             width={30}
@@ -28,11 +26,11 @@ const PostCard = ({ post }) => {
             alt="profile_image"
             className="rounded-full align-middle"
           />
-          <p className="inline align-middle text-gray-700 ml-4 text-lg">
+          <p className="inline align-middle text-gray-600 ml-4 text-lg">
             {post.author.name}
           </p>
         </div>
-        <div className="bg-green-500 flex justify-center items-center font-medium text-gray-700">
+        <div className="flex justify-center items-center font-medium text-gray-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 inline mr-2 text-pink-500"
@@ -50,7 +48,7 @@ const PostCard = ({ post }) => {
           <span>{moment(post.createdAt).format("MMM DD, YYYY")}</span>
         </div>
       </div>
-      <p className=" text-center text-lg text-gray-700 font-normal px-4 lg:p-8 mb-8">
+      <p className=" text-center text-lg text-gray-700 font-normal px-4 lg:p-3 mb-3">
         {post.excerpt}
       </p>
       <div className="text-center">

@@ -10,7 +10,7 @@ const categories = [
 const Header = () => {
   return (
     <header className="container mx-auto px-10 mb-8">
-      <div className="border-b border-blue-400 inline-block w-full py-8">
+      <div className="border-b border-blue-400 inline-block w-full py-5">
         <div className="md:float-left block text-4xl font-bold">logo</div>
         <div className="hidden md:float-left md:contents">
           {categories.map((category) => (
