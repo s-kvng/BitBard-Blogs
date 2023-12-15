@@ -1,5 +1,6 @@
 import { request, gql } from "graphql-request";
 
+const graphAPI = process.env.NEXT_PUBLIC_BITBARD_ENDPOINTS;
 export const getPosts = async () => {
   const query = gql`
     query MyQuery {
@@ -29,4 +30,7 @@ export const getPosts = async () => {
       }
     }
   `;
+  const result = await request(graphAPI, query);
+
+  return result.postsConnection.edges;
 };
