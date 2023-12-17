@@ -56,8 +56,46 @@ export const getPosts = async () => {
     console.error("Error fetching posts:", error);
     return []; // Return an empty array or handle the error accordingly
   }
+};
 
-  // const result = await request(graphAPI, query);
+export const getRecentPosts = async () => {
+  const query = gql`
+    query GetPostDetails(){
+      posts(
+        orderBy: createdAt_ASC
+        last: 3
+      ){
+        title
+        featuredImage{
+          url
+        }
+        createdAt
+        slug
+      }
+    }
+  `;
 
-  // return result.postsConnection.edges;
+  const result = await request(graphAPI, query);
+  return result.posts;
+};
+
+export const getSimiliarPosts = async () => {
+  const query = gql`
+    query GetPostDetails($slug: String!, $categories: [String!]) {
+      posts(
+        where: {
+          slug_not: $slug
+          AND: { categories_some: { slug_in: $categories } }
+        }
+        last: 3
+      ) {
+        title
+        featuredImage {
+          url
+        }
+        createdAt
+        slug
+      }
+    }
+  `;
 };
