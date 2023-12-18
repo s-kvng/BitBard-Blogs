@@ -58,6 +58,50 @@ export const getPosts = async () => {
   }
 };
 
+export const getPostsDetails = async (slug) => {
+  const query = gql`
+    query GetPostDetails($slug: String) {
+      post(where: { slug: $slug }) {
+        author {
+          bio
+          name
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        categories {
+          name
+          slug
+        }
+        content {
+          raw
+        }
+      }
+    }
+  `;
+
+  try {
+    const result = await request(graphAPI, query, { slug });
+
+    // Check and assign default values for photo and featuredImage
+    // const photo = node.author.photo?.url || "/default_photo_url.jpg";
+    // const featuredImage =
+    //   node.featuredImage?.url || "/default_featured_image_url.jpg";
+
+    return result.post;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return {}; // Return an empty object or handle the error accordingly
+  }
+};
+
 export const getRecentPosts = async () => {
   const query = gql`
     query GetPostDetails(){
