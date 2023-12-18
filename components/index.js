@@ -6,3 +6,5 @@ export { default as RightSideBar } from "@/components/shared/RightSideBar";
 export { default as PostDetail } from "@/components/cards/PostDetail";
 export { default as Comments } from "@/components/cards/Comments";
 export { default as CommentsForm } from "@/components/forms/CommentsForm";
+export { default as Author } from "@/components/cards/Author";
+export { default as getPostDetail } from "@/components/utils/getPostDetail";

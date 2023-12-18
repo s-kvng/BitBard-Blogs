@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
         <main className="container mx-auto px-2 lg:px-10 mb-8">
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {children}
-            <RightSideBar />
           </section>
         </main>
       </body>

@@ -58,48 +58,37 @@ export const getPosts = async () => {
   }
 };
 
-export const getPostsDetails = async (slug) => {
+export const getPostDetails = async (slug) => {
   const query = gql`
-    query GetPostDetails($slug: String) {
+    query GetPostDetails($slug: String!) {
       post(where: { slug: $slug }) {
+        title
+        excerpt
+        featuredImage {
+          url
+        }
         author {
-          bio
           name
+          bio
           photo {
             url
           }
         }
         createdAt
         slug
-        title
-        excerpt
-        featuredImage {
-          url
+        content {
+          raw
         }
         categories {
           name
           slug
         }
-        content {
-          raw
-        }
       }
     }
   `;
 
-  try {
-    const result = await request(graphAPI, query, { slug });
-
-    // Check and assign default values for photo and featuredImage
-    // const photo = node.author.photo?.url || "/default_photo_url.jpg";
-    // const featuredImage =
-    //   node.featuredImage?.url || "/default_featured_image_url.jpg";
-
-    return result.post;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return {}; // Return an empty object or handle the error accordingly
-  }
+  const result = await request(graphAPI, query, { slug });
+  return result.post;
 };
 
 export const getRecentPosts = async () => {
@@ -123,7 +112,7 @@ export const getRecentPosts = async () => {
   return result.posts;
 };
 
-export const getSimiliarPosts = async () => {
+export const getSimiliarPosts = async (categories, slug) => {
   const query = gql`
     query GetPostDetails($slug: String!, $categories: [String!]) {
       posts(
@@ -143,7 +132,7 @@ export const getSimiliarPosts = async () => {
     }
   `;
 
-  const result = await request(graphAPI, query);
+  const result = await request(graphAPI, query, { categories, slug });
   return result.posts;
 };
 
