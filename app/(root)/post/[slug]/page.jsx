@@ -1,7 +1,7 @@
 import React from "react";
 
-const PostDetail = () => {
-  return <div className="lg:col-span-8 col-span-1">PostDetail</div>;
+const PostDetails = () => {
+  return <div className="lg:col-span-8 col-span-1">PostDetails</div>;
 };
 
-export default PostDetail;
+export default PostDetails;
