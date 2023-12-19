@@ -7,7 +7,7 @@ const RightSideBar = ({ slug, categories }) => {
       <div className="lg:sticky relative top-8 ">
         <PostWidget
           slug={slug}
-          categories={categories.map((category) => category.slug)}
+          categories={categories?.map((category) => category.slug)}
         />
         <Categories />
       </div>
