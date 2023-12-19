@@ -19,10 +19,10 @@ const PostCard = ({ post }) => {
       </h1>
       <div className="block lg:flex text-center justify-center mb-1 w-full ">
         <div className="flex items-center justify-center mb-3 lg:mb-0 w-full lg:w-4/5 l ">
-          <Image
+          <img
             src={post.author.photo?.url || post.author.photo}
-            width={30}
-            height={30}
+            width="30px"
+            height="30px"
             alt="profile_image"
             className="rounded-full align-middle"
           />

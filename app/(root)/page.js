@@ -3,6 +3,7 @@ import { getPosts } from "@/services";
 
 export default async function Home({ posts }) {
   posts = (await getPosts()) || [];
+  console.log(posts);
   return (
     <>
       <div className="lg:col-span-8 col-span-1 ">

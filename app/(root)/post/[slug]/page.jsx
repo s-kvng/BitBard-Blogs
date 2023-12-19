@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Comments,
@@ -16,15 +16,29 @@ const PostDetails = () => {
   const [post, setPost] = useState({});
   const { slug } = useParams();
 
-  getPostDetails(slug).then((result) => {
-    setPost(result);
-  });
+  useEffect(() => {
+    getPostDetails(slug)
+      .then((result) => {
+        console.log(result);
+        setPost(result);
+      })
+      .catch((error) => {
+        console.error("Error fetching post details:", error);
+        // Handle the error, maybe set a default post or show a friendly error message
+      });
+  }, [slug]); // Include dependencies if needed, in this case, we're watching for changes in 'slug'
+
+  console.log(post);
+  // Check if 'post' is an empty object
+  if (Object.keys(post).length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <div className="lg:col-span-8 col-span-1">
         <PostDetail post={post} />
-        <Author auhtor={post.author} />
+        <Author author={post.author} />
         <CommentsForm slug={post.slug} />
         <Comments slug={post.slug} />
       </div>
