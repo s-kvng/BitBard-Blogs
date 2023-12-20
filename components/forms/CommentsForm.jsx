@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { submitComment } from "@/services";
 
-const CommentsForm = () => {
+const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -17,7 +17,7 @@ const CommentsForm = () => {
     emailEl.current.value = window.localStorage.getItem("email");
   }, []);
 
-  const handleCommentSubmission = ({ slug }) => {
+  const handleCommentSubmission = () => {
     setError(false);
 
     const { value: comment } = commentEl.current;
