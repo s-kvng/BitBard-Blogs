@@ -3,7 +3,6 @@ import { getPosts } from "@/services";
 
 export default async function Home({ posts }) {
   posts = (await getPosts()) || [];
-  console.log(posts);
   return (
     <>
       <div className="lg:col-span-8 col-span-1 ">
@@ -15,11 +14,3 @@ export default async function Home({ posts }) {
     </>
   );
 }
-
-// export async function getStaticProps() {
-//   posts = (await getPosts()) || [];
-
-//   return {
-//     props: { posts },
-//   };
-// }
