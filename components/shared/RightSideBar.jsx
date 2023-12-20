@@ -1,9 +1,16 @@
 import React from "react";
 
-const RightSideBar = () => {
+import { PostWidget, Categories } from "@/components";
+const RightSideBar = ({ slug, categories }) => {
   return (
     <div className=" grid lg:col-span-4 col-span-1">
-      <div className="lg:sticky relative top-8 bg-red-200">RightSideBar</div>
+      <div className="lg:sticky relative top-8 ">
+        <PostWidget
+          slug={slug}
+          categories={categories?.map((category) => category.slug)}
+        />
+        <Categories />
+      </div>
     </div>
   );
 };

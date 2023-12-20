@@ -1,9 +1,25 @@
-import Image from "next/image";
-export default function Home() {
+import { PostCard, RightSideBar } from "@/components";
+import { getPosts } from "@/services";
+
+export default async function Home({ posts }) {
+  posts = (await getPosts()) || [];
+  console.log(posts);
   return (
-    <div className="lg:col-span-8 col-span-1 bg-blue-500">
-      <p>hey</p>
-      <div>Hello world</div>
-    </div>
+    <>
+      <div className="lg:col-span-8 col-span-1 ">
+        {posts.map((post) => (
+          <PostCard key={post.title} post={post} />
+        ))}
+      </div>
+      <RightSideBar />
+    </>
   );
 }
+
+// export async function getStaticProps() {
+//   posts = (await getPosts()) || [];
+
+//   return {
+//     props: { posts },
+//   };
+// }
