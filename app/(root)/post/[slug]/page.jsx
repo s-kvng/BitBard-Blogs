@@ -19,7 +19,6 @@ const PostDetails = () => {
   useEffect(() => {
     getPostDetails(slug)
       .then((result) => {
-        console.log(result);
         setPost(result);
       })
       .catch((error) => {
@@ -28,7 +27,6 @@ const PostDetails = () => {
       });
   }, [slug]); // Include dependencies if needed, in this case, we're watching for changes in 'slug'
 
-  console.log(post);
   // Check if 'post' is an empty object
   if (Object.keys(post).length === 0) {
     return <div>Loading...</div>;
