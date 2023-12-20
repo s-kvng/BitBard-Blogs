@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   Comments,
@@ -8,6 +9,7 @@ import {
   PostDetail,
   Author,
   RightSideBar,
+  Loader,
 } from "@/components";
 import { useParams } from "next/navigation";
 import { getPostDetails } from "@/services";
@@ -15,6 +17,7 @@ import { getPostDetails } from "@/services";
 const PostDetails = () => {
   const [post, setPost] = useState({});
   const { slug } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     getPostDetails(slug)
@@ -29,7 +32,7 @@ const PostDetails = () => {
 
   // Check if 'post' is an empty object
   if (Object.keys(post).length === 0) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
