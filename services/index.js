@@ -35,7 +35,6 @@ export const getPosts = async () => {
     const result = await request(graphAPI, query);
     const posts = result.postsConnection.edges.map((edge) => {
       const { node } = edge;
-      console.log(`result->${result}`);
 
       // Check and assign default values for photo and featuredImage
       const photo = node.author.photo?.url || "/default_photo_url.jpg";

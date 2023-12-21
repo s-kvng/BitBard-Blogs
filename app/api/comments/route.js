@@ -9,7 +9,6 @@ const graphqlAPI = process.env.NEXT_PUBLIC_BITBARD_ENDPOINTS;
 const graphcms = process.env.GRAPHCMS_TOKEN;
 export async function POST(request) {
   const res = await request.json();
-  console.log(res);
   const graphQLClient = new GraphQLClient(graphqlAPI, {
     headers: {
       authorization: `Bearer ${graphcms}`,
