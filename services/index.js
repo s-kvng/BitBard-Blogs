@@ -51,7 +51,6 @@ export const getPosts = async () => {
       };
     });
 
-    console.log(posts);
     return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -161,7 +160,6 @@ export const getCategories = async () => {
 // };
 
 export const submitComment = async (obj) => {
-  console.log(obj);
   const result = await fetch("/api/comments", {
     method: "POST",
     headers: {
