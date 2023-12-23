@@ -1,7 +1,25 @@
 import { request, gql } from "graphql-request";
 
 const graphAPI = process.env.NEXT_PUBLIC_BITBARD_ENDPOINTS;
+
+// Define a cache variable and a time threshold for refreshing the cache
+let cachedPosts = null;
+let lastFetchTimestamp = null;
+const cacheExpirationTime = 30 * 60 * 1000; // 1 minute in milliseconds
+
 export const getPosts = async () => {
+  // Check if the cache is still valid
+  const currentTime = new Date().getTime();
+  const isCacheValid =
+    cachedPosts &&
+    lastFetchTimestamp &&
+    currentTime - lastFetchTimestamp < cacheExpirationTime;
+
+  if (isCacheValid) {
+    // If the cache is valid, return the cached data
+    return cachedPosts;
+  }
+
   const query = gql`
     query MyQuery {
       postsConnection {
@@ -50,6 +68,10 @@ export const getPosts = async () => {
         featuredImage,
       };
     });
+
+    // Update the cache with the new data and timestamp
+    cachedPosts = posts;
+    lastFetchTimestamp = currentTime;
 
     return posts;
   } catch (error) {
