@@ -1,7 +1,11 @@
 import React from "react";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <>
+      <div className="lg:col-span-8 col-span-1 ">posts per category</div>
+    </>
+  );
 };
 
 export default page;
