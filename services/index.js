@@ -5,7 +5,7 @@ const graphAPI = process.env.NEXT_PUBLIC_BITBARD_ENDPOINTS;
 // Define a cache variable and a time threshold for refreshing the cache
 let cachedPosts = null;
 let lastFetchTimestamp = null;
-const cacheExpirationTime = 30 * 60 * 1000; // 1 minute in milliseconds
+const cacheExpirationTime = 30 * 60 * 1000; // 30 minute in milliseconds
 
 export const getPosts = async () => {
   // Check if the cache is still valid
