@@ -1,7 +1,26 @@
 import { request, gql } from "graphql-request";
 
 const graphAPI = process.env.NEXT_PUBLIC_BITBARD_ENDPOINTS;
+
+// Define a cache variable and a time threshold for refreshing the cache
+let cachedPosts = null;
+let lastFetchTimestamp = null;
+const cacheExpirationTime = 30 * 60 * 1000; // 30 minute in milliseconds
+
 export const getPosts = async () => {
+  // Check if the cache is still valid
+  const currentTime = new Date().getTime();
+  const isCacheValid =
+    cachedPosts &&
+    lastFetchTimestamp &&
+    currentTime - lastFetchTimestamp < cacheExpirationTime;
+
+  if (isCacheValid) {
+    // If the cache is valid, return the cached data
+    console.log("cached data");
+    return cachedPosts;
+  }
+
   const query = gql`
     query MyQuery {
       postsConnection {
@@ -35,7 +54,6 @@ export const getPosts = async () => {
     const result = await request(graphAPI, query);
     const posts = result.postsConnection.edges.map((edge) => {
       const { node } = edge;
-      console.log(`result->${result}`);
 
       // Check and assign default values for photo and featuredImage
       const photo = node.author.photo?.url || "/default_photo_url.jpg";
@@ -52,7 +70,10 @@ export const getPosts = async () => {
       };
     });
 
-    console.log(posts);
+    // Update the cache with the new data and timestamp
+    cachedPosts = posts;
+    lastFetchTimestamp = currentTime;
+
     return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -135,6 +156,7 @@ export const getSimiliarPosts = async (categories, slug) => {
   `;
 
   const result = await request(graphAPI, query, { categories, slug });
+  console.log(result);
   return result.posts;
 };
 
@@ -162,7 +184,6 @@ export const getCategories = async () => {
 // };
 
 export const submitComment = async (obj) => {
-  console.log(obj);
   const result = await fetch("/api/comments", {
     method: "POST",
     headers: {
