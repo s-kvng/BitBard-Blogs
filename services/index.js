@@ -17,6 +17,7 @@ export const getPosts = async () => {
 
   if (isCacheValid) {
     // If the cache is valid, return the cached data
+    console.log("cached data");
     return cachedPosts;
   }
 
@@ -155,6 +156,7 @@ export const getSimiliarPosts = async (categories, slug) => {
   `;
 
   const result = await request(graphAPI, query, { categories, slug });
+  console.log(result);
   return result.posts;
 };
 

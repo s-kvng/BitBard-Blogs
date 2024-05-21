@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const PostCard = ({ post }) => {
+  console.log("in card- > ", post);
   return (
     <div className=" bg-white shadow-lg rounded-lg p-0 lg:p-6 pb-8 mb-8">
       <div className=" relative overflow-hidden shadow-md  mb-3">
