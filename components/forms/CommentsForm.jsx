@@ -2,6 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { submitComment } from "@/services";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
@@ -40,11 +43,18 @@ const CommentsForm = ({ slug }) => {
       window.localStorage.removeItem("email", email);
     }
 
-    submitComment(commentObj).then((res) => {
-      setShowSuccessMessage(true);
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-      }, 3000);
+    // submitComment(commentObj).then((res) => {
+    //   setShowSuccessMessage(true);
+    //   setTimeout(() => {
+    //     setShowSuccessMessage(false);
+    //   }, 3000);
+
+    // });
+
+    toast.promise(submitComment(commentObj), {
+      pending: "Post is pending",
+      success: "Submitted for review 👌",
+      error: "Ooops something went wrong 🤯",
     });
   };
 
@@ -98,11 +108,7 @@ const CommentsForm = ({ slug }) => {
         >
           Post Comment
         </button>
-        {showSuccessMessage && (
-          <span className="md:text-xl text-md float-right font-semibold mt-3 text-green-500">
-            Comment submitted for review
-          </span>
-        )}
+        <ToastContainer />
       </div>
     </div>
   );

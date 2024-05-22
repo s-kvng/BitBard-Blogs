@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <NextUIProvider>
           <Header />
-          <main className="container mx-auto px-2 lg:px-10 mb-8">
+          <main className="container mx-auto px-2 lg:px-10 mb-8 mt-10">
             <section className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               {children}
             </section>
