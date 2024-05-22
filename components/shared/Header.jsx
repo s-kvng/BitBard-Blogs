@@ -21,7 +21,16 @@ const Header = () => {
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = ["Home", "About"];
+  const menuItems = [
+    {
+      label: "Home",
+      href: "/",
+    },
+    {
+      label: "About",
+      href: "/about",
+    },
+  ];
 
   useEffect(() => {
     getCategories().then((newCategories) => setCategories(newCategories));
@@ -56,9 +65,14 @@ const Header = () => {
 
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link color={"foreground"} className="w-full" href="#" size="lg">
-              {item}
+          <NavbarMenuItem key={`${item.label}-${index}`}>
+            <Link
+              color={"foreground"}
+              className="w-full"
+              href={item.href}
+              size="lg"
+            >
+              {item.label}
             </Link>
           </NavbarMenuItem>
         ))}
