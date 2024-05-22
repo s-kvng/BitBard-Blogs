@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
   const [localStorage, setLocalStorage] = useState(null);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(true);
   const commentEl = useRef();
   const emailEl = useRef();
   const nameEl = useRef();
@@ -38,9 +37,13 @@ const CommentsForm = ({ slug }) => {
     if (storeData) {
       window.localStorage.setItem("name", name);
       window.localStorage.setItem("email", email);
+      commentEl.current.value = "";
     } else {
       window.localStorage.removeItem("name", name);
       window.localStorage.removeItem("email", email);
+      commentEl.current.value = "";
+      emailEl.current.value = "";
+      nameEl.current.value = "";
     }
 
     // submitComment(commentObj).then((res) => {
@@ -52,7 +55,7 @@ const CommentsForm = ({ slug }) => {
     // });
 
     toast.promise(submitComment(commentObj), {
-      pending: "Post is pending",
+      pending: "Post submission is pending",
       success: "Submitted for review 👌",
       error: "Ooops something went wrong 🤯",
     });
